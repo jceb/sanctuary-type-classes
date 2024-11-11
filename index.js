@@ -78,7 +78,7 @@
 //. > const {Nothing, Just} = Maybe
 //. ```
 
-import type from 'sanctuary-type-identifiers';
+import {identifierOf} from 'sanctuary-type-identifiers';
 
 //  Array$concat :: Array a -> Array a -> Array a
 const Array$concat = xs => ys => xs.concat (ys);
@@ -511,22 +511,22 @@ const hasPrototypeMethod = (name, implementations, value) => {
   if (typeof value['@@type'] === 'string') return false;
 
   if (name === 'equals') {
-    if (value.constructor === Array || type (value) === 'Array') {
+    if (value.constructor === Array || identifierOf (value) === 'Array') {
       return value.every (Setoid.test);
     }
 
-    if (value.constructor === Object || type (value) === 'Object') {
+    if (value.constructor === Object || identifierOf (value) === 'Object') {
       return (Object.values (value)).every (Setoid.test);
     }
     return true;
   }
 
   if (name === 'lte') {
-    if (value.constructor === Array || type (value) === 'Array') {
+    if (value.constructor === Array || identifierOf (value) === 'Array') {
       return value.every (Ord.test);
     }
 
-    if (value.constructor === Object || type (value) === 'Object') {
+    if (value.constructor === Object || identifierOf (value) === 'Object') {
       return (Object.values (value)).every (Ord.test);
     }
   }
@@ -566,7 +566,7 @@ const customPrototypeMethod = (implementations, value) => {
   }
 
   // For all other values we use their type-identity.
-  switch (type (value)) {
+  switch (identifierOf (value)) {
     case 'Arguments': return implementations.Arguments;
     case 'Error': return implementations.Error;
     case 'Object': return implementations.Object;
