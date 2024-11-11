@@ -33,6 +33,7 @@
     "sanctuary-pair": "2.1.x",
     "sanctuary-scripts": "7.0.x",
     "sanctuary-show": "3.0.x",
+    "sanctuary-style": "8.0.x",
     "sanctuary-useless": "2.0.1"
   },
   "files": [
